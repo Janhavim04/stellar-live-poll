@@ -1,16 +1,81 @@
-# React + Vite
+# 🗳️ StellarPoll — Live Blockchain Voting
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A live polling dApp built on the Stellar blockchain for the Yellow Belt level of the Stellar Dev Workshop. Users can connect their Stellar wallet, cast a vote on-chain, and watch results update in real time.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- Multi-wallet support via StellarWalletsKit (Freighter, xBull)
+- Vote Yes or No — stored permanently on the Stellar blockchain
+- Live results that update every 5 seconds
+- Prevents double voting — enforced by smart contract
+- 3 error types handled: already voted, invalid option, network rejection
+- Transaction hash confirmation with Stellar Explorer link
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- Stellar SDK (@stellar/stellar-sdk)
+- StellarWalletsKit (@creit.tech/stellar-wallets-kit)
+- Soroban Smart Contract (Rust)
+
+---
+
+## 📋 Setup Instructions
+
+1. Clone the repo:
+```
+git clone https://github.com/Janhavim04/stellar-live-poll.git
+cd stellar-live-poll
+```
+
+2. Install dependencies:
+```
+npm install
+```
+
+3. Run locally:
+```
+npm run dev
+```
+
+4. Install Freighter wallet from https://freighter.app and switch to Testnet
+
+5. Fund your testnet wallet at https://friendbot.stellar.org
+
+6. Open http://localhost:5173 and connect your wallet to vote!
+
+---
+
+## 📦 Smart Contract
+
+**Contract Address:**
+CAS7VM6JRZDPYPVAZNBTZOO65FH3C6RHZBUSTNYNIHON4UX2FAGN7X2N
+
+**View on Stellar Expert:**
+https://stellar.expert/explorer/testnet/contract/CAS7VM6JRZDPYPVAZNBTZOO65FH3C6RHZBUSTNYNIHON4UX2FAGN7X2N
+
+**Contract Functions:**
+- `vote(voter, option)` — Cast a vote (0 = Yes, 1 = No)
+- `get_results()` — Returns current Yes and No vote counts
+- `has_voted(voter)` — Returns true if wallet already voted
+
+---
+
+## 🚨 Error Handling
+
+| Error | Trigger | Message |
+|---|---|---|
+| Already Voted | Same wallet votes twice | "You have already voted!" |
+| Invalid Option | Option is not 0 or 1 | "Invalid vote option." |
+| Network Rejection | Insufficient balance | "Network rejected the transaction." |
+
+---
+
+## 🔗 Links
+
+- Stellar Expert Contract: https://stellar.expert/explorer/testnet/contract/CAS7VM6JRZDPYPVAZNBTZOO65FH3C6RHZBUSTNYNIHON4UX2FAGN7X2N
+- Stellar Testnet Faucet: https://friendbot.stellar.org
