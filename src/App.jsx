@@ -16,7 +16,9 @@ import {
   WalletNetwork,
   FREIGHTER_ID,
   FreighterModule,
-  xBullModule
+  xBullModule,
+  LobstrModule,
+  HanaModule
 } from '@creit.tech/stellar-wallets-kit'
 import './App.css'
 
@@ -36,6 +38,8 @@ const kit = new StellarWalletsKit({
   modules: [
     new FreighterModule(),
     new xBullModule(),
+    new LobstrModule(),
+    new HanaModule(),
   ]
 })
 
@@ -375,11 +379,12 @@ function App() {
               </button>
 
               <div className="wallet-options-hint">
-                <span>Supports</span>
-                <span className="wallet-chip">Freighter</span>
-                <span className="wallet-chip">xBull</span>
-                <span>and more</span>
-              </div>
+  <span>Supports</span>
+  <span className="wallet-chip">Freighter</span>
+  <span className="wallet-chip">xBull</span>
+  <span className="wallet-chip">LOBSTR</span>
+  <span className="wallet-chip">Hana</span>
+</div>
             </div>
 
           ) : (
